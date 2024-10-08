@@ -5,48 +5,19 @@ name: Publish GitHub Packages
 on:
   workflow_dispatch:
 
-# jobs:
-#   publish-gpr:
-#     runs-on: ubuntu-latest
-#     permissions:
-#       contents: read
-#       packages: write
-#     steps:
-#       - uses: actions/checkout@v4
-#       - uses: ./.github/actions/ci-setup
-#         with:
-#           node-version: 18.x
-#           registry-url: https://npm.pkg.github.com/
-#           scope: "@aisaac-lab"
-#       - run: cd packages/seatmaps-client && pnpm publish --no-git-checks
-#         env:
-#           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
-  publish:
+  publish-gpr:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/ci-setup
         with:
           node-version: 18.x
-          registry-url: https://npm.pkg.github.com
+          registry-url: https://npm.pkg.github.com/
           scope: "@aisaac-lab"
-
-      - name: Use pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-
-      - name: Dependencies Install
-        run: pnpm install
-
-      - name: Build
-        run: cd packages/seatmaps-client && pnpm build:esm
-
-      - name: Publish package
-        run: cd packages/seatmaps-client && pnpm publish --no-git-checks
+      - run: cd packages/seatmaps-client && pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
