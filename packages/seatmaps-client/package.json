@@ -1,6 +1,6 @@
 {
   "name": "@aisaac-lab/seatmaps-client",
-  "version": "3.1.1",
+  "version": "0.0.1",
   "private": false,
   "publishConfig": {
     "access": "restricted",
