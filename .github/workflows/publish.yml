@@ -23,6 +23,11 @@ jobs:
           registry-url: https://npm.pkg.github.com
           scope: "@aisaac-lab"
 
+      - name: Use pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
       - name: Dependencies Install
         run: pnpm install
 
