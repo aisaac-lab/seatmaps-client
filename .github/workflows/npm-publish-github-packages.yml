@@ -2,7 +2,8 @@
 
 name: Publish GitHub Packages
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
 
 jobs:
   publish-gpr:
@@ -16,7 +17,6 @@ jobs:
         with:
           node-version: 18.x
           registry-url: https://npm.pkg.github.com/
-          # scope: "@aisaac-lab"
       - run: cd packages/seatmaps-client && pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
