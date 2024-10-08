@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": false,
   "publishConfig": {
-    "access": "public"
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com/"
   },
   "description": "A client side JavaScript library that enables users to view interactive seating charts for tickets available via the Ticket Evolution API. Forked from ticketevolution/seatmaps-client.",
   "license": "MIT",
