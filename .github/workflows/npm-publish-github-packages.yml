@@ -11,6 +11,10 @@ jobs:
     permissions:
       contents: read
       packages: write
+    defaults:
+      run:
+        working-directory: packages/seatmaps-client
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -31,9 +35,9 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: cd packages/seatmaps-client && pnpm build:esm
+        run: pnpm build:esm
 
       - name: Publish package
-        run: cd packages/seatmaps-client && pnpm publish --no-git-checks
+        run: pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
