@@ -27,13 +27,16 @@ jobs:
         with:
           version: 8
 
+      - name: CD Packages directory
+        working-directory: packages/seatmaps-client
+
       - name: Dependencies Install
         run: pnpm install
 
       - name: Build
-        run: cd packages/seatmaps-client && pnpm build:esm
+        run: pnpm build:esm
 
       - name: Publish package
-        run: cd packages/seatmaps-client && pnpm publish --no-git-checks
+        run: pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
