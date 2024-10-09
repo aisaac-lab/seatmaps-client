@@ -21,7 +21,7 @@
   "globals": {
     "fetchMock": "readonly"
   },
-  "ignorePatterns": ["cjs", "esm", "umd"],
+  "ignorePatterns": ["node_modules/", "dist/", "cjs", "esm", "umd"],
   "rules": {
     "prettier/prettier": "error",
     "no-unused-expressions": [
