@@ -25,8 +25,7 @@
   "sideEffects": false,
   "files": [
     "cjs",
-    "esm",
-    "dist"
+    "esm"
   ],
   "scripts": {
     "dev": "vite",
