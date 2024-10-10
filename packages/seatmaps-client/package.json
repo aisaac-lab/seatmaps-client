@@ -1,6 +1,6 @@
 {
   "name": "@aisaac-lab/seatmaps-client",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "publishConfig": {
     "access": "restricted",
     "registry": "https://npm.pkg.github.com/"
@@ -25,12 +25,11 @@
   "sideEffects": false,
   "files": [
     "cjs",
-    "esm",
-    "dist"
+    "esm"
   ],
   "scripts": {
     "dev": "vite",
-    "build": "pnpm build:cjs && pnpm build:esm && pnpm vite-build",
+    "build": "pnpm build:cjs && pnpm build:esm",
     "vite-build": "vite build",
     "build:watch": "concurrently \"pnpm build:cjs --watch\" \"pnpm build:esm --watch\" \"pnpm build:umd-minimal --watch\" \"pnpm build:umd-standalone --watch\"",
     "release": "pnpm run build && changeset publish",
