@@ -1,6 +1,6 @@
 {
   "name": "@aisaac-lab/seatmaps-client",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "publishConfig": {
     "access": "restricted",
     "registry": "https://npm.pkg.github.com/"

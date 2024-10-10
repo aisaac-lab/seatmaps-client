@@ -139,8 +139,19 @@ export function initializeZoom(svg: SVGSVGElement) {
 
   let touching = false;
 
+  let lastTouchX: number;
+  let lastTouchY: number;
+  let isDragging = false;
+
   // for each touch start with exactly two touches, update the initial touch points and viewbox
   function handleTouchStart(event: TouchEvent) {
+    if (event.touches.length === 1) {
+      const touch = event.touches[0];
+      lastTouchX = touch.clientX;
+      lastTouchY = touch.clientY;
+      isDragging = true;
+    }
+
     // only respond when two fingers are on the screen
     if (event.touches.length !== 2) {
       return;
@@ -165,6 +176,33 @@ export function initializeZoom(svg: SVGSVGElement) {
   }
 
   function handleTouchMove(event: TouchEvent) {
+    if (isDragging && event.touches.length === 1) {
+      event.preventDefault();
+
+      const touch = event.touches[0];
+      const deltaX = touch.clientX - lastTouchX;
+      const deltaY = touch.clientY - lastTouchY;
+
+      // Update the last touch positions
+      lastTouchX = touch.clientX;
+      lastTouchY = touch.clientY;
+
+      // Move the viewBox
+      viewbox.x -= deltaX;
+      viewbox.y -= deltaY;
+
+      console.log({
+        deltaX,
+        deltaY,
+        lastTouchX,
+        lastTouchY,
+      });
+
+      // Optionally, constrain the viewBox to prevent it from moving out of bounds
+      // viewbox.x = Math.max(0, Math.min(viewbox.x, initialViewboxWidth - viewbox.width));
+      // viewbox.y = Math.max(0, Math.min(viewbox.y, initialViewboxHeight - viewbox.height));
+    }
+
     const touchA = event.touches.item(0);
     const touchB = event.touches.item(1);
 
@@ -210,6 +248,9 @@ export function initializeZoom(svg: SVGSVGElement) {
   }
 
   function handleTouchEnd(event: TouchEvent) {
+    if (event.touches.length === 0) {
+      isDragging = false;
+    }
     if (event.touches.length < 2) {
       touching = false;
     }
